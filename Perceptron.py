@@ -1,37 +1,38 @@
 
 from PIL import Image
+import numpy as np
 
-def E (e):
-    print(predict(e,weights0))
-    print(predict(e,weights1))
 
-# Make a prediction with weights
-def predict(row, weights):
-    activation = weights[0]
-    for i in range(len(row)-2):
-        activation += weights[i + 1] * row[i]
-    return 1 if activation>=0 else 0
+def predict(row, W):
+    arg_max = 0
+    predicted_class = 0
+    
+    for c in range(254):
+        current_activation = np.dot(row, W[c])
+        if current_activation >= arg_max:
+            arg_max, predicted_class = current_activation, c+1
+    return predicted_class
 
 # Estimate Perceptron weights using stochastic gradient descent
-def train_weights(train, l_rate, n_epoch,K):
-    weights = [0.0 for i in range(len(train[0]))]
+def train_weights(dataset, W, l_rate, n_epoch,E):
     
     for epoch in range(n_epoch):
-        sum_error = 0.0
-        for row in train:
-            if row[-1] == K:
-                y = 1
-            else: y = 0
-            prediction = predict(row, weights)
-            error = y - prediction
-            sum_error += error**2
-            weights[0] = weights[0] + l_rate * error
-            for i in range(len(row)-1):
-                weights[i + 1] = weights[i + 1] + l_rate * error * row[i]
-        print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, l_rate, sum_error))
-    return weights
+        c = 0
+        error = 0
+        for row in dataset:
+            prediction = predict(row, W)
+            print( E[c], prediction)
+            if not (E[c] == prediction):
+                step = [i * l_rate for i in row]
+                a = np.array(W[E[c]])
+                b = np.array(step)
+                W[E[c]] = a+b
+                W[prediction] = a-b
+                error = error+1
+            c = c+1
+    return W
 
-# Calculate weights
+#MAIN
 with Image.open('/Users/ClaudiaEspinoza/Desktop/I.png').convert('L') as imgI: #.open opens file, .convert('L') changes it to grayscale image
     I = list(imgI.getdata())
 with Image.open('/Users/ClaudiaEspinoza/Desktop/key1.png').convert('L') as key1:
@@ -44,8 +45,23 @@ with Image.open('/Users/ClaudiaEspinoza/Desktop/E.png').convert('L') as E:
 #output.save('output.png')
 
 l_rate = 0.0001
-n_epoch = 20
-for i in range(len(I)-1):
-    dataset = [1,key1[i],key2[i],I[i],E[i]]
+n_epoch = 1
+W = []
+dataset = []
+for i in range(255):
+    W.append([])
+    for j in range(4):
+        W[i].append(0.0)
+
+for i in range(len(I)):
+    dataset.append([])
+    dataset[i].append(1)
+    dataset[i].append(key1[i])
+    dataset[i].append(key2[i])
+    dataset[i].append(I[i])
+
+W = train_weights(dataset,W,l_rate,n_epoch,E)
+
+
 #weights0 = train_weights(dataset, l_rate, n_epoch, 0)
 
