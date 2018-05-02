@@ -34,9 +34,9 @@ CODE
 *save list I, key1, key2, into a list of list. This will make it easier to index our training data. For example, dataset[0] = [key1[0], key2[0], I[0]].
 *function used to train weights  --->   W[k+1] = W[k] + (dataset[k] * step)
 
-TRAINING function
+TRAINING
 
-while (epoch==1) or (epoch<n_epoch) and (np.any((np.absolute(np.array(W) - np.array(w_previous)))>vig)): //avoids recursion if the vector has no changes
+while (epoch==1) or (epoch<n_epoch) and (np.any((np.absolute(np.array(W) - np.array(w_previous)))>vig)):
 
     for k in range (120000):
 
@@ -65,7 +65,7 @@ for i in range(120000):
     if W[i][2] == 0: c = 1 //avoid division by 0
 
     else: c = 0
-    
+
     Iprime[i] = (Eprime[i]- (W[i][0]*key1[i]) - (W[i][1]*key2[i])) / (W[i][2]+c)
 
 OUTPUT
