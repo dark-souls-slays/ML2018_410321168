@@ -35,7 +35,7 @@ CODE
 *function used to train weights  --->   W[k+1] = W[k] + (dataset[k] * step)
 
 TRAINING
-
+```python
 while (epoch==1) or (epoch<n_epoch) and (np.any((np.absolute(np.array(W) - np.array(w_previous)))>vig)):
 
     for k in range (120000):
@@ -53,6 +53,7 @@ while (epoch==1) or (epoch<n_epoch) and (np.any((np.absolute(np.array(W) - np.ar
     print epoch
 
     epoch = epoch + 1
+```
 
 INPUT
 
@@ -60,6 +61,7 @@ INPUT
 
 DECRYPTING THE IMAGE
 
+```python
 for i in range(120000):
 
     if W[i][2] == 0: c = 1 //avoid division by 0
@@ -67,6 +69,8 @@ for i in range(120000):
     else: c = 0
 
     Iprime[i] = (Eprime[i]- (W[i][0]*key1[i]) - (W[i][1]*key2[i])) / (W[i][2]+c)
+```
 
 OUTPUT
+
 ![alt text](https://github.com/dark-souls-slays/ML2018_410321168/blob/master/output2.png?raw=true)
