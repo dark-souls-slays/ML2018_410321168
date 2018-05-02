@@ -59,9 +59,13 @@ INPUT
 ![alt text](https://github.com/dark-souls-slays/ML2018_410321168/blob/master/Eprime.png?raw=true)
 
 DECRYPTING THE IMAGE
+
 for i in range(120000):
+
     if W[i][2] == 0: c = 1 //avoid division by 0
+
     else: c = 0
+    
     Iprime[i] = (Eprime[i]- (W[i][0]*key1[i]) - (W[i][1]*key2[i])) / (W[i][2]+c)
 
 OUTPUT
