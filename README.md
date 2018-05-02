@@ -2,9 +2,12 @@ Version Controlled Image Decryption by Single Layer Neural Network
 
 PROBLEM DESCRIPTION
 Perceptron receives input from training data K1,K2,I, and expected output E; find weights (w1, w2, w3).
+
+
 ![alt text](https://github.com/dark-souls-slays/ML2018_410321168/blob/master/E.png?raw=true)
-
-
+![alt text](https://github.com/dark-souls-slays/ML2018_410321168/blob/master/I.png?raw=true)
+![alt text](https://github.com/dark-souls-slays/ML2018_410321168/blob/master/key1.png?raw=true)
+![alt text](https://github.com/dark-souls-slays/ML2018_410321168/blob/master/key2.png?raw=true)
 
 The weights of the Perceptron algorithm must be estimated from the training data.
 For each pixel (120000), find the weights that were used to encrypt image I into image E. Then we use this same weights to decrypt image I'.
@@ -12,7 +15,7 @@ For each pixel (120000), find the weights that were used to encrypt image I into
 
 
 FINDING W
-Objective: Train activation function by following the gradients of the cost function (minimize the cost function).
+Objective: Train the function by following the gradients of the cost function (minimize the cost function).
 
 1. Learning Rate: Used to limit the amount each weight is corrected each time it is updated.
 2. Epochs: The number of times to run through the training data while updating the weight.
@@ -26,3 +29,10 @@ CODE
 *open the images using Pillow
 *save the values of the grayscale image (0-255) in a list. We now have 4 list with 120000 pixel values each.
 *save list I, key1, key2, into a list of list. This will make it easier to index our training data. For example, dataset[0] = [key1[0], key2[0], I[0]].
+*function used to train weights  --->   W[k+1] = W[k] + (dataset[k] * step)
+
+INPUT
+![alt text](https://github.com/dark-souls-slays/ML2018_410321168/blob/master/Eprime.png?raw=true)
+
+OUTPUT
+![alt text](https://github.com/dark-souls-slays/ML2018_410321168/blob/master/output2.png?raw=true)
