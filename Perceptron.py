@@ -2,22 +2,6 @@
 from PIL import Image
 import numpy as np
 
-"""
-    # Estimate Perceptron weights using stochastic gradient descent
-    def train_weights(dataset, W, alpha, n_epoch,E):
-    w_previous  = np.zeros((400*300, 3))
-    vig = np.full((400*300, 3), .0001)
-    a = np.zeros((400*300,1))
-    e = np.zeros((400*300,1))
-    while (epoch==1) or (epoch<n_epoch) and (np.any((np.absolute(np.array(W) - np.array(w_previous)))>vig))
-    for k in range (120000):
-    a[k] = W[k].dot(dataset[k])
-    e[k] = E[k] - a[k]
-    w_previous[k] = W[k]
-    W[k] = W[k] + np.dot(dataset[k], (alpha * e[k]))
-    epoch = epoch + 1
-    return W
-    """
 #MAIN
 with Image.open('/Users/ClaudiaEspinoza/Desktop/I.png').convert('L') as imgI: #.open opens file, .convert('L') changes it to grayscale image
     I = list(imgI.getdata())
@@ -72,4 +56,3 @@ for i in range(120000):
 output = Image.new('L', (400,300))
 output.putdata(Iprime)
 output.save('output2.png')
-
