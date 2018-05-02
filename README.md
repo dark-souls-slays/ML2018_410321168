@@ -37,13 +37,21 @@ CODE
 TRAINING function
 
 while (epoch==1) or (epoch<n_epoch) and (np.any((np.absolute(np.array(W) - np.array(w_previous)))>vig)): //avoids recursion if the vector has no changes
+
     for k in range (120000):
+
         a[k] = W[k].dot(dataset[k]) //prediction = key1w1 + key2w2 + Iw3
+
         e[k] = E[k] - a[k]         // ERROR pixel k of image E - prediction with vector W at k
+
         step = alpha * e[k]        // multiply error by small constant
+
         w_previous[k] = W[k]
+
         W[k+1] = W[k] + (dataset[k] * step)
+
     print epoch
+
     epoch = epoch + 1
 
 INPUT
